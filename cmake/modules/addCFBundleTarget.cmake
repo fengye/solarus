@@ -81,7 +81,6 @@ endif()
 # Add executable target into CFBundle form and rename it as requested
 add_executable(${SOLARUS_BUNDLE_TARGET_NAME} MACOSX_BUNDLE
   ${source_files}
-  ${SOLARUS_TARGET_NAME}
   ${SOLARUS_BUNDLE_ICON} 
   ${SOLARUS_BUNDLE_COPIED_LIBRARIES}
 )
@@ -193,7 +192,7 @@ add_custom_command(
   COMMAND mv 
   ARGS "${PROJECT_BINARY_DIR}/${SOLARUS_BUNDLE}.app/Contents/MacOS/${SOLARUS_BUNDLE}" "${PROJECT_BINARY_DIR}/${SOLARUS_BUNDLE}.app/Contents/Resources/solarus"
   COMMAND cp 
-  ARGS "${PROJECT_BINARY_DIR}/cmake/apple/OSX-wrapper.sh" "${PROJECT_BINARY_DIR}/${SOLARUS_BUNDLE}.app/Contents/MacOS/${SOLARUS_BUNDLE}"
+  ARGS "${PROJECT_SOURCE_DIR}/cmake/apple/OSX-wrapper.sh" "${PROJECT_BINARY_DIR}/${SOLARUS_BUNDLE}.app/Contents/MacOS/${SOLARUS_BUNDLE}"
 )
 
 # Copy the PkgInfo file
@@ -202,6 +201,6 @@ if(NOT XCODE)
     TARGET ${SOLARUS_BUNDLE_TARGET_NAME}
     POST_BUILD
     COMMAND cp
-    ARGS "${PROJECT_BINARY_DIR}/cmake/apple/PkgInfo" "${PROJECT_BINARY_DIR}/${SOLARUS_BUNDLE}.app/Contents/"
+    ARGS "${PROJECT_SOURCE_DIR}/cmake/apple/PkgInfo" "${PROJECT_BINARY_DIR}/${SOLARUS_BUNDLE}.app/Contents/"
   )
 endif()
